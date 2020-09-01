@@ -1,3 +1,9 @@
+[![Travis CI](https://img.shields.io/travis/psonrie/geolocation.svg?style=flat-square)](https://travis-ci.org/psonrie/geolocation)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/psonrie/geolocation.svg?style=flat-square)](https://scrutinizer-ci.com/g/psonrie/geolocation/?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/psonrie/geolocation.svg?style=flat-square)](https://packagist.org/packages/psonrie/geolocation)
+[![Total Downloads](https://img.shields.io/packagist/dt/psonrie/geolocation.svg?style=flat-square)](https://packagist.org/packages/psonrie/geolocation)
+[![License](https://img.shields.io/packagist/l/psonrie/geolocation.svg?style=flat-square)](https://packagist.org/packages/psonrie/geolocation)
+
 # Geo Location
 
 Laravel service provider to retrieve a users location from their IP address using [freegeoip.app](https://freegeoip.app/) service.
