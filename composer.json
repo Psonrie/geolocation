@@ -1,0 +1,57 @@
+{
+  "name": "psonrie/geolocation",
+  "description": "Laravel service provider to retrieve a users location by their IP Address",
+  "authors": [
+    {
+      "name": "Ger Toska",
+      "email": "gcano@psonrie.com"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "FreeGeoIp",
+    "geo-location",
+    "php",
+    "location",
+    "geo",
+    "geoIP",
+    "ip"
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "ext-json": "*",
+    "ext-curl": "*",
+    "illuminate/support": "~5.0|~6.0|~7.0"
+  },
+  "require-dev": {
+    "mockery/mockery": "~0.9",
+    "orchestra/testbench": "~3.2|~4.0"
+  },
+  "archive": {
+    "exclude": [
+      "/tests"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Psonrie\\GeoLocation\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Psonrie\\GeoLocation\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Psonrie\\GeoLocation\\GeoLocationServiceProvider"
+      ],
+      "aliases": {
+        "GeoLocation": "Psonrie\\GeoLocation\\Facades\\GeoLocation"
+      }
+    }
+  }
+}
