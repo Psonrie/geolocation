@@ -74,6 +74,26 @@ class Response implements Arrayable
     public $metroCode;
 
     /**
+     * Response constructor.
+     *
+     * @param array $driverResponse
+     */
+    public function __construct($driverResponse)
+    {
+        $this->ip          = $driverResponse['ip'];
+        $this->countryCode = $driverResponse['country_code'];
+        $this->countryName = $driverResponse['country_name'];
+        $this->regionCode  = $driverResponse['region_code'];
+        $this->regionName  = $driverResponse['region_name'];
+        $this->cityName    = $driverResponse['city'];
+        $this->zipCode     = $driverResponse['zip_code'];
+        $this->timeZone    = $driverResponse['time_zone'];
+        $this->latitude    = $driverResponse['latitude'];
+        $this->longitude   = $driverResponse['longitude'];
+        $this->metroCode   = $driverResponse['metro_code'];
+    }
+
+    /**
      * Determine if the response is empty.
      *
      * @return bool

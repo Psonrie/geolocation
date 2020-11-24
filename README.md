@@ -10,7 +10,7 @@ Laravel service provider to retrieve a users location from their IP address usin
 
 ## Requirements
 
-- Laravel >= 5
+- Laravel >= 5.5
 - PHP 7.0 or greater
 - cURL extension enabled
 
@@ -42,7 +42,9 @@ php artisan vendor:publish --provider="Psonrie\GeoLocation\GeoLocationServicePro
 #### Retrieving a users location
 
 ```php
-$response = GeoLocation::get('46.24.247.56');
+$geoLocation = new GeoLocation();
+
+$response = $geoLocation->get('46.24.247.56');
 
 // Returns instance of Psonrie\GeoLocation\Response
 
