@@ -2,7 +2,7 @@
 
 namespace Psonrie\GeoLocation\Drivers;
 
-use Illuminate\Support\Fluent;
+use Psonrie\GeoLocation\Exceptions\AddressNotFoundException;
 use Psonrie\GeoLocation\Response;
 
 abstract class Driver
@@ -17,21 +17,13 @@ abstract class Driver
     abstract protected function url($ip);
 
     /**
-     * Hydrates the Response object with the given geo-location data.
-     *
-     * @param Response $response
-     * @param Fluent   $geoLocation
-     *
-     * @return \Psonrie\GeoLocation\Response
-     */
-    abstract protected function hydrate(Response $response, Fluent $geoLocation);
-
-    /**
      * Request the specified driver for this IP.
      *
      * @param string $ip
      *
-     * @return Fluent|bool
+     * @return Response
+     *
+     * @throws AddressNotFoundException
      */
     abstract protected function request($ip);
 
@@ -41,12 +33,12 @@ abstract class Driver
      * @param string $ip
      *
      * @return Response|bool
+     *
+     * @throws AddressNotFoundException
      */
     public function get($ip)
     {
-        $data = $this->request($ip);
-
-        $response = $this->hydrate($this->getNewResponse(), $data);
+        $response = $this->request($ip);
 
         if (!$response->isEmpty()) {
             $response->ip = $ip;

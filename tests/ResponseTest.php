@@ -2,7 +2,6 @@
 
 namespace Psonrie\GeoLocation\Tests;
 
-use Illuminate\Support\Fluent;
 use Mockery;
 use Psonrie\GeoLocation\Drivers\Driver;
 use Psonrie\GeoLocation\Drivers\FreeGeoIp;
@@ -12,22 +11,26 @@ use Psonrie\GeoLocation\Response;
 
 class ResponseTest extends TestCase
 {
+    const TEST_IP = '66.102.0.0';
+
     public function testDriverRequest()
     {
         $driver = Mockery::mock(Driver::class);
 
         GeoLocation::setDriver($driver);
 
-        $response           = new Response();
-        $response->cityName = 'test';
+        $attributes = $this->emptyAttributes();
+
+        $attributes['city'] = 'test';
+
+        $response = new Response($attributes);
 
         $driver
             ->makePartial()
             ->shouldAllowMockingProtectedMethods()
-            ->shouldReceive('request')->once()->andReturn(new Fluent(['test']))
-            ->shouldReceive('hydrate')->once()->andReturn($response);
+            ->shouldReceive('request')->once()->andReturn($response);
 
-        $this->assertEquals($response, GeoLocation::get('66.102.0.0'));
+        $this->assertEquals($response, GeoLocation::get(self::TEST_IP));
     }
 
     public function testDriverDoesNotExist()
@@ -36,7 +39,7 @@ class ResponseTest extends TestCase
 
         $this->expectException(DriverDoesNotExistException::class);
 
-        GeoLocation::get('66.102.0.0');
+        GeoLocation::get(self::TEST_IP);
     }
 
     public function testFreeGeoIp()
@@ -44,6 +47,7 @@ class ResponseTest extends TestCase
         $driver = Mockery::mock(FreeGeoIp::class)->makePartial();
 
         $attributes = [
+            'ip'           => self::TEST_IP,
             'country_code' => 'US',
             'country_name' => 'United States',
             'region_code'  => '',
@@ -58,11 +62,11 @@ class ResponseTest extends TestCase
 
         $driver
             ->shouldAllowMockingProtectedMethods()
-            ->shouldReceive('request')->once()->andReturn(new Fluent($attributes));
+            ->shouldReceive('request')->once()->andReturn(new Response($attributes));
 
         GeoLocation::setDriver($driver);
 
-        $response = GeoLocation::get('66.102.0.0');
+        $response = GeoLocation::get(self::TEST_IP);
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(
@@ -77,7 +81,7 @@ class ResponseTest extends TestCase
                 'latitude'    => '37.751',
                 'longitude'   => '-97.822',
                 'metroCode'   => 0,
-                'ip'          => '66.102.0.0',
+                'ip'          => self::TEST_IP,
             ],
             $response->toArray()
         );
@@ -85,17 +89,45 @@ class ResponseTest extends TestCase
 
     public function testResponseIsEmpty()
     {
-        $response = new Response();
+        $attributes = $this->emptyAttributes();
 
-        $response->ip = '66.102.0.0';
+        $attributes['ip'] = self::TEST_IP;
+
+        $response = new Response($attributes);
+
         $this->assertTrue($response->isEmpty());
     }
 
     public function testResponseIsNotEmpty()
     {
-        $response = new Response();
+        $attributes = $this->emptyAttributes();
 
-        $response->countryCode = 'test';
+        $attributes['country_name'] = 'test';
+
+        $response = new Response($attributes);
+
         $this->assertFalse($response->isEmpty());
+    }
+
+    /**
+     * Return empty attributes to construct a Response
+     *
+     * @return array
+     */
+    private function emptyAttributes()
+    {
+        return [
+            'ip'           => null,
+            'country_code' => null,
+            'country_name' => null,
+            'region_code'  => null,
+            'region_name'  => null,
+            'city'         => null,
+            'zip_code'     => null,
+            'time_zone'    => null,
+            'latitude'     => null,
+            'longitude'    => null,
+            'metro_code'   => null,
+        ];
     }
 }
