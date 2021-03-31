@@ -6,7 +6,7 @@
 
 # Geo Location
 
-Laravel service provider to retrieve a users location from their IP address using [freegeoip.app](https://freegeoip.app/) service.
+Laravel service provider to retrieve a users location from their IP address using [freegeoip.app](https://freegeoip.app/) or [geolocation-db](https://geolocation-db.com/) service.
 
 ## Requirements
 

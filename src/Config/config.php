@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'driver' => Psonrie\GeoLocation\Drivers\FreeGeoIp::class,
+    'driver' => Psonrie\GeoLocation\Drivers\GeoLocationDb::class,
 
     /*
     |--------------------------------------------------------------------------

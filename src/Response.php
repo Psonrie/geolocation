@@ -25,12 +25,6 @@ class Response implements Arrayable
      */
     public $countryName;
     /**
-     * The region code.
-     *
-     * @var string|null
-     */
-    public $regionCode;
-    /**
      * The region name.
      *
      * @var string|null
@@ -49,12 +43,6 @@ class Response implements Arrayable
      */
     public $zipCode;
     /**
-     * The time zone.
-     *
-     * @var string|null
-     */
-    public $timeZone;
-    /**
      * The latitude.
      *
      * @var string|null
@@ -66,12 +54,6 @@ class Response implements Arrayable
      * @var string|null
      */
     public $longitude;
-    /**
-     * The metro code.
-     *
-     * @var string|null
-     */
-    public $metroCode;
 
     /**
      * Response constructor.
@@ -80,17 +62,14 @@ class Response implements Arrayable
      */
     public function __construct($driverResponse)
     {
-        $this->ip          = $driverResponse['ip'];
+        $this->ip          = isset($driverResponse['ip']) ?? $driverResponse['IPv4'];
         $this->countryCode = $driverResponse['country_code'];
         $this->countryName = $driverResponse['country_name'];
-        $this->regionCode  = $driverResponse['region_code'];
-        $this->regionName  = $driverResponse['region_name'];
+        $this->regionName  = $driverResponse['state'];
         $this->cityName    = $driverResponse['city'];
-        $this->zipCode     = $driverResponse['zip_code'];
-        $this->timeZone    = $driverResponse['time_zone'];
+        $this->zipCode     = $driverResponse['postal'];
         $this->latitude    = $driverResponse['latitude'];
         $this->longitude   = $driverResponse['longitude'];
-        $this->metroCode   = $driverResponse['metro_code'];
     }
 
     /**
@@ -102,7 +81,7 @@ class Response implements Arrayable
     {
         $data = $this->toArray();
 
-        unset($data['ip']);
+        unset($data['IPv4']);
 
         return empty(array_filter($data));
     }
