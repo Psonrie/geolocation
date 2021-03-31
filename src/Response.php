@@ -62,7 +62,7 @@ class Response implements Arrayable
      */
     public function __construct($driverResponse)
     {
-        $this->ip          = isset($driverResponse['ip']) ?? $driverResponse['IPv4'];
+        $this->ip          = $driverResponse['ip'] ?? $driverResponse['IPv4'];
         $this->countryCode = $driverResponse['country_code'];
         $this->countryName = $driverResponse['country_name'];
         $this->regionName  = $driverResponse['state'];

@@ -50,14 +50,11 @@ class ResponseTest extends TestCase
             'ip'           => self::TEST_IP,
             'country_code' => 'US',
             'country_name' => 'United States',
-            'region_code'  => '',
-            'region_name'  => '',
+            'state'        => '',
             'city'         => '',
-            'zip_code'     => '',
-            'time_zone'    => 'America/Chicago',
+            'postal'       => '',
             'latitude'     => 37.751,
             'longitude'    => -97.822,
-            'metro_code'   => 0,
         ];
 
         $driver
@@ -73,15 +70,12 @@ class ResponseTest extends TestCase
             [
                 'countryCode' => 'US',
                 'countryName' => 'United States',
-                'regionCode'  => '',
-                'regionName'  => '',
-                'cityName'    => '',
-                'zipCode'     => '',
-                'timeZone'    => 'America/Chicago',
-                'latitude'    => '37.751',
-                'longitude'   => '-97.822',
-                'metroCode'   => 0,
-                'ip'          => self::TEST_IP,
+                'state'        => '',
+                'city'         => '',
+                'postal'       => '',
+                'latitude'     => '37.751',
+                'longitude'    => '-97.822',
+                'ip'           => self::TEST_IP,
             ],
             $response->toArray()
         );
@@ -120,14 +114,11 @@ class ResponseTest extends TestCase
             'ip'           => null,
             'country_code' => null,
             'country_name' => null,
-            'region_code'  => null,
-            'region_name'  => null,
+            'state'        => null,
             'city'         => null,
-            'zip_code'     => null,
-            'time_zone'    => null,
+            'postal'       => null,
             'latitude'     => null,
             'longitude'    => null,
-            'metro_code'   => null,
         ];
     }
 }

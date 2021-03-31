@@ -20,7 +20,13 @@ class GeoLocationDb extends Driver
      */
     protected function request($ip)
     {
-        $driverResponse = json_decode($this->executeRequest($this->url($ip)), true);
+        $driverResponse = null;
+
+        $content = $this->executeRequest($this->url($ip));
+
+        if (is_string($content)) {
+            $driverResponse = json_decode($content, true);
+        }
 
         if (null === $driverResponse) {
             throw new AddressNotFoundException("The IP address {$ip} could not be found.");
