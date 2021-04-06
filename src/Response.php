@@ -81,7 +81,7 @@ class Response implements Arrayable
     {
         $data = $this->toArray();
 
-        unset($data['IPv4']);
+        unset($data['ip']);
 
         return empty(array_filter($data));
     }
