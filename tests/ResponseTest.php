@@ -70,11 +70,11 @@ class ResponseTest extends TestCase
             [
                 'countryCode' => 'US',
                 'countryName' => 'United States',
-                'state'        => '',
-                'city'         => '',
-                'postal'       => '',
-                'latitude'     => '37.751',
-                'longitude'    => '-97.822',
+                'regionName'   => '',
+                'cityName'     => '',
+                'zipCode'      => '',
+                'latitude'     => 37.750999999999998,
+                'longitude'    => -97.822000000000003,
                 'ip'           => self::TEST_IP,
             ],
             $response->toArray()
@@ -85,7 +85,7 @@ class ResponseTest extends TestCase
     {
         $attributes = $this->emptyAttributes();
 
-        $attributes['ip'] = self::TEST_IP;
+        $attributes['IPv4'] = self::TEST_IP;
 
         $response = new Response($attributes);
 
@@ -111,7 +111,7 @@ class ResponseTest extends TestCase
     private function emptyAttributes()
     {
         return [
-            'ip'           => null,
+            'IPv4'         => null,
             'country_code' => null,
             'country_name' => null,
             'state'        => null,
