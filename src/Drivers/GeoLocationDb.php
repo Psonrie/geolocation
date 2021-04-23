@@ -12,7 +12,7 @@ class GeoLocationDb extends Driver
      */
     protected function url($ip)
     {
-        return "https://geolocation-db.com/json/$ip";
+        return "http://geolocation-db.com/json/$ip";
     }
 
     /**
